@@ -157,12 +157,13 @@
     }
 }
 
-#pragma mark -- 判断是否全是数字
+#pragma mark -- 判断是否 Int 或 float 类型
 - (BOOL)isPureNumber:(NSString *)string{
     if (string) {
         NSScanner* scan = [NSScanner scannerWithString:string];
         int val;
-        return [scan scanInt:&val] && [scan isAtEnd];
+        float flo;
+        return ([scan scanInt:&val] && [scan isAtEnd]) || [scan scanFloat:&flo];
     }
     return NO;
 }
