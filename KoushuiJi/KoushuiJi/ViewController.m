@@ -21,21 +21,13 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(50, 50, 300, 300)];
     [self.view addSubview:label];
     label.numberOfLines = 0;
-    [label fourStatus:@"第一段"
-           secondPart:@"第二段"
-            threePart:@"第三段"
-             fourPart:@"第四段"
-           firstValue:[UIColor redColor]
-          secondValue:[UIColor greenColor]
-           threeValue:[UIColor greenColor]
-            fourValue:[UIColor grayColor]];
+
+    [label threeStatus:@"请问请问"
+            secondPart:@"sadsad"
+             threePart:@"阿斯顿撒旦"
+            firstValue:[UIColor greenColor]
+           secondValue:[UIColor cyanColor]
+            threeValue:[UIColor redColor]];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

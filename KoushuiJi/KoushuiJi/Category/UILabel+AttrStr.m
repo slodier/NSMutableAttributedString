@@ -118,25 +118,53 @@
     NSString *totalStr;
     totalStr = [NSString stringWithFormat:@"%@%@%@%@%@%@",first,second,three,four,five,six];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+    
     NSRange range1 = {0,first.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value1 range:range1];
+    [self totalAttStr:attrStr value:value1 range:range1];
     
     NSRange range2 = {first.length,second.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value2 range:range2];
+    [self totalAttStr:attrStr value:value2 range:range2];
     
     NSRange range3 = {first.length + second.length,three.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value3 range:range3];
+    [self totalAttStr:attrStr value:value3 range:range3];
     
     NSRange range4 = {first.length + second.length + three.length,four.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value4 range:range4];
-    
+    [self totalAttStr:attrStr value:value4 range:range4];
+
     NSRange range5 = {first.length + second.length + three.length + four.length,five.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value5 range:range5];
-    
+    [self totalAttStr:attrStr value:value5 range:range5];
+
     NSRange range6 = {first.length + second.length + three.length + four.length + five.length,six.length};
-    [attrStr addAttribute:NSForegroundColorAttributeName value:value6 range:range6];
+    [self totalAttStr:attrStr value:value6 range:range6];
     
     self.attributedText = attrStr;
+}
+
+#pragma mark -- 添加属性
+- (void)totalAttStr:(NSMutableAttributedString *)attrStr
+       value:(id)value
+       range:(NSRange)range
+{
+    //如果是 UIColor 类型就添加颜色属性
+    if ([value isKindOfClass:[UIColor class]]) {
+        [attrStr addAttributes:@{NSForegroundColorAttributeName:value} range:range];
+        
+    //如果是数字,就是添加字体属性
+    }else if ([self isPureNumber:value]){
+        [attrStr addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:[value intValue]]} range:range];
+    }else{
+        return;
+    }
+}
+
+#pragma mark -- 判断是否全是数字
+- (BOOL)isPureNumber:(NSString *)string{
+    if (string) {
+        NSScanner* scan = [NSScanner scannerWithString:string];
+        int val;
+        return [scan scanInt:&val] && [scan isAtEnd];
+    }
+    return NO;
 }
 
 @end
